@@ -15,6 +15,7 @@
 package org.hyperledger.besu.cli.subcommands.storage;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import io.github.pixee.security.ObjectInputFilters;
 import static org.hyperledger.besu.cli.options.stable.DataStorageOptions.BONSAI_STORAGE_FORMAT_MAX_LAYERS_TO_LOAD;
 import static org.hyperledger.besu.controller.BesuController.DATABASE_PATH;
 import static org.hyperledger.besu.ethereum.worldstate.DataStorageConfiguration.Unstable.DEFAULT_BONSAI_TRIE_LOG_PRUNING_WINDOW_SIZE;
@@ -346,6 +347,7 @@ public class TrieLogHelper {
     try (FileInputStream fis = new FileInputStream(batchFileName);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
 
+      ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
       trieLogs = (IdentityHashMap<byte[], byte[]>) ois.readObject();
     } catch (IOException | ClassNotFoundException e) {
       LOG.error(e.getMessage());
