@@ -9,25 +9,6 @@ on:
       - zkbesu
 
 jobs:
-  sonarcloud:
-      name: SonarCloud
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-          with:
-            fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-        - name: SonarCloud Scan
-          uses: SonarSource/sonarcloud-github-action@master
-          env:
-            GITHUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}  # Needed to get PR information, if any
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            
-        - name: Upload Tool Results To Pixeebot
-          uses: pixee/upload-tool-results-action@v1
-          with:
-            tool: sonar
-            sonar-token: ${{ secrets.SONAR_TOKEN }}
-
   build_and_test:
     runs-on: ubuntu-22.04-16core
     env:
