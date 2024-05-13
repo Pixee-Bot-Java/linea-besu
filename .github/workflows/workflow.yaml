@@ -108,4 +108,14 @@ jobs:
       - name: Build and Publish Docker Image
         run: |
           ./gradlew -Pdocker-platform=linux/amd64,linux/arm64 distDocker
-  
+          
+  share:
+      name: Upload Sonar Results to Pixeebot
+      runs-on: ubuntu-latest
+      if: ${{ github.event.check_run.name == 'SonarCloud Code Analysis' }}
+      steps:
+        - uses: pixee/upload-tool-results-action@v1
+          with:
+            tool: sonar
+            sonar-token: ${{ secrets.SONAR_TOKEN }}
+          
