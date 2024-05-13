@@ -2,7 +2,7 @@ name: Fix Sonar Issues with Pixeebot
 on:
    push:
      branches:
-        - main
+        - zkbesu
 
 permissions:
   id-token: write
