@@ -1,7 +1,7 @@
 # SonarScan
-name: "Sonar Scan"
-on: [push]
+on: [push, pull_request]
 
+name: "Sonar Scan"
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
