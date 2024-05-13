@@ -143,7 +143,7 @@ public class VmTraceGenerator {
       case "CALL":
       case "CREATE":
       case "CREATE2":
-        if (currentOperation.equals("CALL") || currentOperation.equals("DELEGATECALL")) {
+        if ("CALL".equals(currentOperation) || "DELEGATECALL".equals(currentOperation)) {
           findReturnInCall(currentTraceFrame, currentIndex)
               .map(output -> new Mem(output.getOutputData().toHexString(), 0))
               .ifPresent(report::setMem);
@@ -191,7 +191,7 @@ public class VmTraceGenerator {
         } else {
           if (currentTraceFrame.getPrecompiledGasCost().isPresent()) {
             op.setCost(op.getCost() + currentTraceFrame.getPrecompiledGasCost().orElse(0L));
-          } else if ((currentOperation.equals("STATICCALL") || currentOperation.equals("CALL"))
+          } else if (("STATICCALL".equals(currentOperation) || "CALL".equals(currentOperation))
               && nextTraceFrame.map(TraceFrame::getDepth).orElse(0)
                   > currentTraceFrame.getDepth()) {
             op.setCost(currentTraceFrame.getGasRemainingPostExecution() + op.getCost());
@@ -316,7 +316,7 @@ public class VmTraceGenerator {
     for (int i = callIndex; i < transactionTrace.getTraceFrames().size(); i++) {
       if (i + 1 < transactionTrace.getTraceFrames().size()) {
         final TraceFrame next = transactionTrace.getTraceFrames().get(i + 1);
-        if (next.getOpcode().equals("RETURN") && next.getDepth() == callFrame.getDepth()) {
+        if ("RETURN".equals(next.getOpcode()) && next.getDepth() == callFrame.getDepth()) {
           return Optional.of(next);
         }
       }

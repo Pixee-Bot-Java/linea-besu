@@ -175,7 +175,7 @@ public class DebugOperationTracer implements OperationTracer {
             TraceFrame foundTraceFrame = null;
             int frameIndex = traceFrames.size() - 1;
             do {
-              if (!traceFrames.get(frameIndex).getOpcode().equals("RETURN")) {
+              if (!"RETURN".equals(traceFrames.get(frameIndex).getOpcode())) {
                 foundTraceFrame = traceFrames.get(frameIndex);
               }
               frameIndex--;

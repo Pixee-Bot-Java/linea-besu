@@ -39,7 +39,7 @@ public class CorsAllowedOriginsProperty extends AbstractList<String> {
   @Override
   @Nonnull
   public Iterator<String> iterator() {
-    if (domains.size() == 1 && domains.get(0).equals("none")) {
+    if (domains.size() == 1 && "none".equals(domains.get(0))) {
       return Collections.emptyIterator();
     } else {
       return domains.iterator();

@@ -61,7 +61,7 @@ public class Enclave {
     try {
       final String upcheckResponse =
           requestTransmitter.get(null, null, "/upcheck", this::handleRawResponse, false);
-      return upcheckResponse.equals("I'm up!");
+      return "I'm up!".equals(upcheckResponse);
     } catch (final Exception e) {
       return false;
     }

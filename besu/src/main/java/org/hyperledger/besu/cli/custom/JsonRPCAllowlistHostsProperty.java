@@ -36,7 +36,7 @@ public class JsonRPCAllowlistHostsProperty extends AbstractList<String> {
   @Override
   @Nonnull
   public Iterator<String> iterator() {
-    if (hostnamesAllowlist.size() == 1 && hostnamesAllowlist.get(0).equals("none")) {
+    if (hostnamesAllowlist.size() == 1 && "none".equals(hostnamesAllowlist.get(0))) {
       return Collections.emptyIterator();
     } else {
       return hostnamesAllowlist.iterator();

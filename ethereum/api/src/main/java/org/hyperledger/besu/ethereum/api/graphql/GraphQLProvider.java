@@ -91,9 +91,9 @@ public class GraphQLProvider {
     final String childTypeName = environment.getParentType().getName();
     final String fieldName = environment.getField().getName();
 
-    if (childTypeName.equals("Transaction") && fieldName.equals("block")) {
+    if ("Transaction".equals(childTypeName) && "block".equals(fieldName)) {
       return childComplexity + 100;
-    } else if (childTypeName.equals("__Type") && fieldName.equals("fields")) {
+    } else if ("__Type".equals(childTypeName) && "fields".equals(fieldName)) {
       return childComplexity + 100;
     } else {
       return childComplexity + 1;

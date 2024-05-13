@@ -421,7 +421,7 @@ public class FlatTraceGenerator {
   private static String getActionAddress(
       final Action.Builder callingAction, final String recipient) {
     if (callingAction.getCallType() != null) {
-      return callingAction.getCallType().equals("call")
+      return "call".equals(callingAction.getCallType())
           ? callingAction.getTo()
           : callingAction.getFrom();
     }

@@ -110,7 +110,7 @@ public class VersionMetadata implements Comparable<VersionMetadata> {
       final boolean enforceCompatibilityProtection, final Path dataDir) throws IOException {
     final VersionMetadata metadataVersion = VersionMetadata.lookUpFrom(dataDir);
     final VersionMetadata runtimeVersion = getRuntimeVersion();
-    if (metadataVersion.getBesuVersion().equals(VersionMetadata.BESU_VERSION_UNKNOWN)) {
+    if (VersionMetadata.BESU_VERSION_UNKNOWN.equals(metadataVersion.getBesuVersion())) {
       // The version isn't known, potentially because the file doesn't exist. Write the latest
       // version to the metadata file.
       LOG.info(

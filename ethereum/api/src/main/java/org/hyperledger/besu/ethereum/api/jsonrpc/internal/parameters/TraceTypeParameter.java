@@ -34,13 +34,13 @@ public class TraceTypeParameter {
 
     @JsonCreator
     static TraceType fromString(final String traceType) {
-      if (traceType.equalsIgnoreCase("trace")) {
+      if ("trace".equalsIgnoreCase(traceType)) {
         return TraceType.TRACE;
       }
-      if (traceType.equalsIgnoreCase("vmTrace")) {
+      if ("vmTrace".equalsIgnoreCase(traceType)) {
         return TraceType.VM_TRACE;
       }
-      if (traceType.equalsIgnoreCase("stateDiff")) {
+      if ("stateDiff".equalsIgnoreCase(traceType)) {
         return TraceType.STATE_DIFF;
       }
       return null;

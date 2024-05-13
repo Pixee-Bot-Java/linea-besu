@@ -112,7 +112,7 @@ public class EnodeURLImpl implements EnodeURL {
     checkStringArgumentNotEmpty(uri.getUserInfo(), "Missing node ID.");
 
     checkArgument(
-        uri.getScheme().equalsIgnoreCase("enode"), "Invalid URI scheme (must equal \"enode\").");
+        "enode".equalsIgnoreCase(uri.getScheme()), "Invalid URI scheme (must equal \"enode\").");
     checkArgument(
         NODE_ID_PATTERN.matcher(uri.getUserInfo()).matches(),
         "Invalid node ID: node ID must have exactly 128 hexadecimal characters and should not include any '0x' hex prefix.");
