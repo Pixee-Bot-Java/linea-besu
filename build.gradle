@@ -30,6 +30,15 @@ plugins {
   id 'me.champeau.jmh' version '0.7.2' apply false
   id 'net.ltgt.errorprone' version '3.1.0'
   id 'maven-publish'
+  id "org.sonarqube" version "4.4.1.3373"
+}
+
+sonar {
+  properties {
+    property "sonar.projectKey", "Pixee-Bot-Java_linea-besu"
+    property "sonar.organization", "open-source-contributor-via-pixeebot-java"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
 
 if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {
