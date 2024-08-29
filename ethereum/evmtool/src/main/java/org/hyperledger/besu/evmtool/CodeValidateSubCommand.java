@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.evmtool;
 
+import io.github.pixee.security.BoundedLineReader;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hyperledger.besu.evmtool.CodeValidateSubCommand.COMMAND_NAME;
 
@@ -92,7 +93,7 @@ public class CodeValidateSubCommand implements Runnable {
 
   private void checkCodeFromBufferedReader(final BufferedReader in) {
     try {
-      for (String code = in.readLine(); code != null; code = in.readLine()) {
+      for (String code = BoundedLineReader.readLine(in, 5_000_000); code != null; code = BoundedLineReader.readLine(in, 5_000_000)) {
         output.print(considerCode(code));
       }
     } catch (IOException e) {

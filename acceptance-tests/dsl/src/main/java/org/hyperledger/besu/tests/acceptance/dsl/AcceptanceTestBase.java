@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.tests.acceptance.dsl;
 
+import io.github.pixee.security.BoundedLineReader;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -166,10 +167,10 @@ public class AcceptanceTestBase {
   private void printOutput(final Process process) {
     try (final BufferedReader in =
         new BufferedReader(new InputStreamReader(process.getInputStream(), UTF_8))) {
-      String line = in.readLine();
+      String line = BoundedLineReader.readLine(in, 5_000_000);
       while (line != null) {
         LOG.info(line);
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
       }
     } catch (final IOException e) {
       LOG.warn("Failed to read output from memory information process: ", e);

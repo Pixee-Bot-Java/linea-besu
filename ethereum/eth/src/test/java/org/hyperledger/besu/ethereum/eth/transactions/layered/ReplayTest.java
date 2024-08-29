@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.eth.transactions.layered;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.hyperledger.besu.ethereum.eth.transactions.layered.TransactionsLayer.RemovalReason.INVALIDATED;
@@ -117,13 +118,13 @@ public class ReplayTest {
             new InputStreamReader(
                 new GZIPInputStream(getClass().getResourceAsStream("/tx.csv.gz")),
                 StandardCharsets.UTF_8))) {
-      currBlockHeader = mockBlockHeader(br.readLine());
+      currBlockHeader = mockBlockHeader(BoundedLineReader.readLine(br, 5_000_000));
       final BaseFeeMarket baseFeeMarket = FeeMarket.london(0L);
 
       final TransactionPoolConfiguration poolConfig =
           ImmutableTransactionPoolConfiguration.builder()
-              .prioritySenders(readPrioritySenders(br.readLine()))
-              .maxPrioritizedTransactionsByType(readMaxPrioritizedByType(br.readLine()))
+              .prioritySenders(readPrioritySenders(BoundedLineReader.readLine(br, 5_000_000)))
+              .maxPrioritizedTransactionsByType(readMaxPrioritizedByType(BoundedLineReader.readLine(br, 5_000_000)))
               .build();
 
       final AbstractPrioritizedTransactions prioritizedTransactions =
