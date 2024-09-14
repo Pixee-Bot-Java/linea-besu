@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.eth.transactions.layered;
 
+import java.security.SecureRandom;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hyperledger.besu.datatypes.TransactionType.EIP1559;
 import static org.hyperledger.besu.datatypes.TransactionType.FRONTIER;
@@ -51,7 +52,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 public class BaseFeePrioritizedTransactionsTest extends AbstractPrioritizedTransactionsTestBase {
   private static final FeeMarket EIP1559_FEE_MARKET = FeeMarket.london(0L);
   private static final Wei DEFAULT_BASE_FEE = DEFAULT_MIN_GAS_PRICE.subtract(2);
-  private static final Random randomizeTxType = new Random();
+  private static final Random randomizeTxType = new SecureRandom();
 
   @Override
   AbstractPrioritizedTransactions getSorter(
