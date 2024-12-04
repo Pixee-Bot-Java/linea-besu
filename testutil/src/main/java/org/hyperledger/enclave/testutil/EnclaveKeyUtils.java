@@ -14,6 +14,7 @@
  */
 package org.hyperledger.enclave.testutil;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +50,7 @@ public class EnclaveKeyUtils {
     InputStream is = EnclaveKeyUtils.class.getResourceAsStream("/" + keyFileName);
     InputStreamReader streamReader = new InputStreamReader(is, StandardCharsets.UTF_8);
     try (BufferedReader reader = new BufferedReader(streamReader)) {
-      return reader.readLine();
+      return BoundedLineReader.readLine(reader, 5_000_000);
     }
   }
 
