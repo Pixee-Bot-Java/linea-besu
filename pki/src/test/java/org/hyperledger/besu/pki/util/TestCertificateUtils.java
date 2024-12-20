@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.pki.util;
 
+import java.security.SecureRandom;
 import org.hyperledger.besu.pki.cms.CmsCreator;
 
 import java.io.IOException;
@@ -96,7 +97,7 @@ public class TestCertificateUtils {
       final X509v3CertificateBuilder certificateBuilder =
           new JcaX509v3CertificateBuilder(
                   new X500Name("CN=" + name),
-                  new BigInteger(32, new Random()),
+                  new BigInteger(32, new SecureRandom()),
                   Date.from(notBefore),
                   Date.from(notAfter),
                   new X500Name("CN=" + name),
@@ -147,7 +148,7 @@ public class TestCertificateUtils {
       final X509v3CertificateBuilder certificateBuilder =
           new JcaX509v3CertificateBuilder(
                   issuer,
-                  new BigInteger(32, new Random()),
+                  new BigInteger(32, new SecureRandom()),
                   Date.from(notBefore),
                   Date.from(notAfter),
                   new X500Name("CN=" + subject),

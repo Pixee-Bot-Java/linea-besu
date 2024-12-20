@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.eth.transactions;
 
+import java.security.SecureRandom;
 import static org.hyperledger.besu.datatypes.TransactionType.BLOB;
 import static org.hyperledger.besu.ethereum.eth.transactions.PendingTransaction.toTransactionList;
 
@@ -75,7 +76,7 @@ public class TransactionBroadcaster implements TransactionBatchAddedListener {
     this.transactionsMessageSender = transactionsMessageSender;
     this.newPooledTransactionHashesMessageSender = newPooledTransactionHashesMessageSender;
     this.ethContext = ethContext;
-    this.random = seed != null ? new Random(seed) : new Random();
+    this.random = seed != null ? new Random(seed) : new SecureRandom();
   }
 
   public void relayTransactionPoolTo(

@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.stratum;
 
+import java.security.SecureRandom;
 import org.hyperledger.besu.datatypes.Hash;
 import org.hyperledger.besu.ethereum.api.jsonrpc.RpcMethod;
 import org.hyperledger.besu.ethereum.api.jsonrpc.internal.JsonRpcRequest;
@@ -54,7 +55,7 @@ public class Stratum1Protocol implements StratumProtocol {
 
   private static String createSubscriptionID() {
     byte[] subscriptionBytes = new byte[16];
-    new Random().nextBytes(subscriptionBytes);
+    new SecureRandom().nextBytes(subscriptionBytes);
     return Bytes.wrap(subscriptionBytes).toShortHexString();
   }
 
