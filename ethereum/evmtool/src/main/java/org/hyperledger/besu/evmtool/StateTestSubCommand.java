@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.evmtool;
 
+import io.github.pixee.security.BoundedLineReader;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hyperledger.besu.ethereum.referencetests.ReferenceTestProtocolSchedules.shouldClearEmptyAccounts;
 import static org.hyperledger.besu.evmtool.StateTestSubCommand.COMMAND_NAME;
@@ -139,7 +140,7 @@ public class StateTestSubCommand implements Runnable {
         final BufferedReader in =
             new BufferedReader(new InputStreamReader(parentCommand.in, UTF_8));
         while (true) {
-          final String fileName = in.readLine();
+          final String fileName = BoundedLineReader.readLine(in, 5_000_000);
           if (fileName == null) {
             // reached end of file.  Stop the loop.
             break;

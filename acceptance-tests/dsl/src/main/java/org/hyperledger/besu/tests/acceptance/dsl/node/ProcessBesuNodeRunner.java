@@ -15,6 +15,7 @@
 package org.hyperledger.besu.tests.acceptance.dsl.node;
 
 import static com.google.common.base.Preconditions.checkState;
+import io.github.pixee.security.BoundedLineReader;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import org.hyperledger.besu.cli.options.TransactionPoolOptions;
@@ -464,14 +465,14 @@ public class ProcessBesuNodeRunner implements BesuNodeRunner {
 
       MDC.put("node", node.getName());
 
-      String line = in.readLine();
+      String line = BoundedLineReader.readLine(in, 5_000_000);
       while (line != null) {
         // would be nice to pass up the log level of the incoming log line
         PROCESS_LOG.info(line);
         if (capturingConsole) {
           consoleOut.println(line);
         }
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
       }
     } catch (final IOException e) {
       if (besuProcesses.containsKey(node.getName())) {

@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.core.encoding;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.hyperledger.besu.ethereum.core.Transaction;
@@ -95,7 +96,7 @@ public class BlobTransactionEncodingTest {
           BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
 
         String line;
-        while ((line = bufferedReader.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null) {
           contentBuilder.append(line);
         }
       }
