@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.eth.manager;
 
+import java.security.SecureRandom;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -221,7 +222,7 @@ public class EthSchedulerTest {
   @Test
   public void itemsSubmittedToOrderedProcessorAreProcessedInOrder() throws InterruptedException {
     final int numOfItems = 100;
-    final Random random = new Random();
+    final Random random = new SecureRandom();
     final EthScheduler realEthScheduler = new EthScheduler(1, 1, 1, new NoOpMetricsSystem());
 
     final List<String> processedStrings = new CopyOnWriteArrayList<>();

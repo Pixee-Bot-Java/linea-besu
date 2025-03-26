@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.eth.transactions.sorter;
 
+import java.security.SecureRandom;
 import org.hyperledger.besu.datatypes.TransactionType;
 import org.hyperledger.besu.datatypes.Wei;
 import org.hyperledger.besu.ethereum.core.Transaction;
@@ -38,7 +39,7 @@ public class BaseFeePendingTransactionsTest extends AbstractPendingTransactionsT
         AbstractPendingTransactionsTestBase::mockBlockHeader);
   }
 
-  private static final Random randomizeTxType = new Random();
+  private static final Random randomizeTxType = new SecureRandom();
 
   @Override
   protected Transaction createTransaction(final long transactionNumber) {

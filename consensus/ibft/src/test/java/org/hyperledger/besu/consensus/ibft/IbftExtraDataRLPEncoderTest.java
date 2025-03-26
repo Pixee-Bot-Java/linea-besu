@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.consensus.ibft;
 
+import java.security.SecureRandom;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -270,7 +271,7 @@ public class IbftExtraDataRLPEncoderTest {
 
     // Create randomised vanity data.
     final byte[] vanity_bytes = createNonEmptyVanityData();
-    new Random().nextBytes(vanity_bytes);
+    new SecureRandom().nextBytes(vanity_bytes);
     final Bytes vanity_data = Bytes.wrap(vanity_bytes);
 
     final BytesValueRLPOutput encoder = new BytesValueRLPOutput();

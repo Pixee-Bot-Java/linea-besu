@@ -15,6 +15,7 @@
 package org.hyperledger.besu.evm.precompile;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import java.security.SecureRandom;
 import static org.hyperledger.besu.crypto.Hash.keccak256;
 
 import org.hyperledger.besu.crypto.Hash;
@@ -45,7 +46,7 @@ import org.apache.tuweni.bytes.Bytes32;
 @SuppressWarnings("UnusedMethod")
 public class Benchmarks {
 
-  static final Random random = new Random();
+  static final Random random = new SecureRandom();
 
   static final long GAS_PER_SECOND_STANDARD = 35_000_000L;
 
