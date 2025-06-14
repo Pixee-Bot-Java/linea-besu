@@ -15,6 +15,7 @@
 package org.hyperledger.besu.cli.subcommands.rlp;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import io.github.pixee.security.BoundedLineReader;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import org.hyperledger.besu.cli.BesuCommand;
@@ -145,7 +146,7 @@ public class RLPSubCommand implements Runnable {
           BufferedReader reader = Files.newBufferedReader(jsonSourceFile.toPath(), UTF_8);
 
           String line;
-          while ((line = reader.readLine()) != null) jsonData.append(line);
+          while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) jsonData.append(line);
         } catch (IOException e) {
           throw new ExecutionException(spec.commandLine(), "Unable to read JSON file.");
         }
@@ -272,7 +273,7 @@ public class RLPSubCommand implements Runnable {
           BufferedReader reader = Files.newBufferedReader(jsonSourceFile.toPath(), UTF_8);
 
           // Read only the first line if there are many lines
-          inputData = reader.readLine();
+          inputData = BoundedLineReader.readLine(reader, 5_000_000);
         } catch (IOException e) {
           throw new ExecutionException(spec.commandLine(), "Unable to read input file.");
         }
