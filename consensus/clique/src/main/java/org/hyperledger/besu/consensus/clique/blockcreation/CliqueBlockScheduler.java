@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.consensus.clique.blockcreation;
 
+import java.security.SecureRandom;
 import org.hyperledger.besu.config.CliqueConfigOptions;
 import org.hyperledger.besu.consensus.common.ForksSchedule;
 import org.hyperledger.besu.consensus.common.validator.ValidatorProvider;
@@ -34,7 +35,7 @@ public class CliqueBlockScheduler extends DefaultBlockScheduler {
 
   private final ValidatorProvider validatorProvider;
   private final Address localNodeAddress;
-  private final Random r = new Random();
+  private final Random r = new SecureRandom();
 
   /**
    * Instantiates a new Clique block scheduler.

@@ -17,6 +17,7 @@ package org.hyperledger.besu.ethereum.p2p.rlpx.framing;
 import static io.netty.buffer.ByteBufUtil.decodeHexDump;
 import static io.netty.buffer.Unpooled.buffer;
 import static io.netty.buffer.Unpooled.wrappedBuffer;
+import java.security.SecureRandom;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -57,7 +58,7 @@ public class FramerTest {
     };
 
     final byte[] byteArray = new byte[0xFFFFFF];
-    new Random().nextBytes(byteArray);
+    new SecureRandom().nextBytes(byteArray);
     final MessageData ethMessage = new RawMessage(0x00, Bytes.wrap(byteArray));
 
     final HandshakeSecrets secrets = new HandshakeSecrets(aes, mac, mac);

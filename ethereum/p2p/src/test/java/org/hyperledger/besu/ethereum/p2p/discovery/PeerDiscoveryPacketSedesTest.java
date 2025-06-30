@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.p2p.discovery;
 
+import java.security.SecureRandom;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.data.Offset.offset;
@@ -43,7 +44,7 @@ public class PeerDiscoveryPacketSedesTest {
   @Test
   public void serializeDeserializeEntirePacket() {
     final byte[] r = new byte[64];
-    new Random().nextBytes(r);
+    new SecureRandom().nextBytes(r);
     final Bytes target = Bytes.wrap(r);
     final NodeKey nodeKey = NodeKeyUtils.generate();
 
@@ -62,7 +63,7 @@ public class PeerDiscoveryPacketSedesTest {
   @Test
   public void serializeDeserializeFindNeighborsPacketData() {
     final byte[] r = new byte[64];
-    new Random().nextBytes(r);
+    new SecureRandom().nextBytes(r);
     final Bytes target = Bytes.wrap(r);
 
     final FindNeighborsPacketData packet = FindNeighborsPacketData.create(target);
@@ -95,7 +96,7 @@ public class PeerDiscoveryPacketSedesTest {
   @Test
   public void deserializeDifferentPacketData() {
     final byte[] r = new byte[64];
-    new Random().nextBytes(r);
+    new SecureRandom().nextBytes(r);
     final Bytes target = Bytes.wrap(r);
 
     final FindNeighborsPacketData packet = FindNeighborsPacketData.create(target);
@@ -109,7 +110,7 @@ public class PeerDiscoveryPacketSedesTest {
   @Test
   public void integrityCheckFailsUnmatchedHash() {
     final byte[] r = new byte[64];
-    new Random().nextBytes(r);
+    new SecureRandom().nextBytes(r);
     final Bytes target = Bytes.wrap(r);
 
     final NodeKey nodeKey = NodeKeyUtils.generate();

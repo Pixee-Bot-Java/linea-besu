@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.eth.manager.snap;
 
+import java.security.SecureRandom;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hyperledger.besu.ethereum.eth.manager.snap.SnapServer.HASH_LAST;
 import static org.mockito.ArgumentMatchers.any;
@@ -67,7 +68,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class SnapServerTest {
-  static Random rand = new Random();
+  static Random rand = new SecureRandom();
 
   record SnapTestAccount(
       Hash addressHash,

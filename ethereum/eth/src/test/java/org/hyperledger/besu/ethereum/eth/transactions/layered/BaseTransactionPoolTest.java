@@ -14,6 +14,7 @@
  */
 package org.hyperledger.besu.ethereum.eth.transactions.layered;
 
+import java.security.SecureRandom;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.hyperledger.besu.crypto.KeyPair;
@@ -58,7 +59,7 @@ public class BaseTransactionPoolTest {
   protected static final Address SENDER2 = Util.publicKeyToAddress(KEYS2.getPublicKey());
   protected static final Wei DEFAULT_MIN_GAS_PRICE = Wei.of(50);
   protected static final Wei DEFAULT_MIN_PRIORITY_FEE = Wei.ZERO;
-  private static final Random randomizeTxType = new Random();
+  private static final Random randomizeTxType = new SecureRandom();
 
   protected final Transaction transaction0 = createTransaction(0);
   protected final Transaction transaction1 = createTransaction(1);
